@@ -48,6 +48,6 @@ catch (PDOException $e) {
     // Ja rodas kļūda, izvada kļūdas ziņu
     echo "Kļūda savienojumā: " . $e->getMessage();
 }
-
+$pdo = null;
 
 ?>
