@@ -13,9 +13,20 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     echo "Savienojums veiksmīgi izveidots!";
-} catch (PDOException $e) {
+
+     // SQL vaicājums, lai atlasītu rakstus un komentārus
+     $sql = "SELECT p.post_id, p.title, p.content, c.comment, c.author as comment_author
+     FROM posts p
+     LEFT JOIN comments c ON p.post_id = c.post_id";
+
+} 
+
+
+
+catch (PDOException $e) {
     // Ja rodas kļūda, izvada kļūdas ziņu
     echo "Kļūda savienojumā: " . $e->getMessage();
 }
+
 
 ?>
