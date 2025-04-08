@@ -15,9 +15,9 @@ try {
     echo "Savienojums veiksmīgi izveidots!";
 
     // SQL vaicājums, lai atlasītu rakstus un komentārus
-    $sql = "SELECT p.post_id, p.title, p.content, c.comment, c.author as comment_author
+    $sql = "SELECT p.id, p.title, p.content, c.comment
     FROM posts p
-    LEFT JOIN comments c ON p.post_id = c.post_id";
+    LEFT JOIN comments c ON p.id = c.post_id";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -25,14 +25,14 @@ try {
     if ($stmt->rowCount() > 0) {
         // Izvada katru rindu no rezultātiem
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "Post ID: " . $row["post_id"] . "<br>";
+            echo "Post ID: " . $row["id"] . "<br>";
             echo "Title: " . $row["title"] . "<br>";
             echo "Content: " . $row["content"] . "<br>";
             
             // Ja ir komentārs, izvada to
             if ($row["comment"]) {
-                echo "Comment: " . $row["comment"] . "<br>";
-                echo "Comment Author: " . $row["comment_author"] . "<br><br>";
+                echo "Comment: " . $row["comment"] . "<br><br>";
+                
             } else {
                 echo "No comments available.<br><br>";
             }
